@@ -22,6 +22,9 @@ list_gpg_keys() {
 delete_gpg_key() {
     echo
     echo "$(figlet -f digital "Delete GPG Key")" | lolcat
+    echo "GPG keys:"
+    gpg --list-secret-keys --keyid-format LONG
+    echo
     printf '\n%s\n' "Which key do you want to delete (Enter 1/2/3/...)"
     read n
     keyId=$(gpg --list-secret-keys --keyid-format=long | awk '$1 ~ /sec/ {print $2}' | awk -F "/" '{print $2}' | sed -n "${n}p")  
@@ -59,6 +62,8 @@ set_gpg_key_for_git() {
     keyId=$(gpg --list-secret-keys --keyid-format=long | awk '$1 ~ /sec/ {print $2}' | awk -F "/" '{print $2}' | sed -n "${num}p")
     git config --global user.signingkey "$keyId"
     git config --global commit.gpgsign true
+    gpg --armor --export $keyId
+    echo "paste the above key on your github."
     echo "GPG key $keyId set for Git commits."
 }
 
