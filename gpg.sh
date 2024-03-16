@@ -33,23 +33,22 @@ delete_gpg_key() {
 }
 
 create_gpg_key() {
-    gpg --full-generate-key
-#     echo
-#     echo "$(figlet -f digital "Create New GPG Key")" | lolcat
-#     echo "Do you want to generate a default or a full GPG key?"
-#     read -p "Enter 'default' or 'full': " key_type
-#     if [ "$key_type" == "default" ]; then
-#         echo "Please enter your name and email address:"
-#         read -p "Name: " user_name
-#         read -p "Email: " user_email
-#         gpg --quick-generate-key "$user_name <$user_email>" default default never
-#         echo "Default GPG key created."
-#     elif [ "$key_type" == "full" ]; then  
-#         gpg --full-generate-key
-#         echo "Full GPG key created."
-#     else
-#         echo "Invalid choice. Please try again."
-#     fi
+    echo
+    echo "$(figlet -f digital "Create New GPG Key")" | lolcat
+    echo "Do you want to generate a default or a full GPG key?"
+    read -p "Enter 'default' or 'full': " key_type
+    if [ "$key_type" == "default" ]; then
+        echo "Please enter your name and email address:"
+        read -p "Name: " user_name
+        read -p "Email: " user_email
+        gpg --quick-generate-key "$user_name <$user_email>" default default never
+        echo "Default GPG key created."
+    elif [ "$key_type" == "full" ]; then  
+        gpg --full-generate-key
+        echo "Full GPG key created."
+    else
+        echo "Invalid choice. Please try again."
+    fi
 }
 
 set_gpg_key_for_git() {
