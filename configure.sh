@@ -18,6 +18,7 @@ check_os_and_install() {
         install_on_macos
     else
         echo "Unsupported operating system. Please install lolcat and figlet manually."
+        exit[0]
     fi
 }
 
